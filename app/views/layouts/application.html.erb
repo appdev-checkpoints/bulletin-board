@@ -26,8 +26,28 @@
   </head>
 
   <body class="pico">
-    <div class="container-two-thirds">
-      <%= yield %>
-    </div>
+    <header>
+      <div class="container-two-thirds">
+        <nav>
+          <ul>
+            <li>
+              <a href="/">
+                <strong>Bulletin Board</strong>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <div class="container-two-thirds">
+        <%= yield %>
+      </div>
+    </main>
+
+    <footer class="text-center">
+      AppDev 2025. All rights reserved.
+    </footer>
   </body>
 </html>
