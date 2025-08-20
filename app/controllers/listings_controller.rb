@@ -16,7 +16,11 @@ class ListingsController < ApplicationController
 
     new_listing.save
 
-    # redirect to the parent board's details page
-    redirect_to("/boards/#{new_listing.board_id}", { :notice => "Listing created successfully." })
+    if new_listing.id != nil
+      # redirect to the parent board's details page
+      redirect_to("/boards/#{new_listing.board_id}", { :notice => "Listing created successfully." })
+    else
+      redirect_to("/boards/#{new_listing.board_id}", { :alert => new_listing.errors.full_messages.to_sentence })
+    end
   end
 end

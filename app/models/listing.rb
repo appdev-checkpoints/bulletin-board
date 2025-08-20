@@ -11,4 +11,7 @@
 #  board_id   :integer
 #
 class Listing < ApplicationRecord
+  validates :body, :presence => true
+  validates :expires_on, :presence => true
+  validates :title, :presence => true
 end
