@@ -18,6 +18,10 @@ class BoardsController < ApplicationController
 
     # render({ :template => "board_templates/create_confirm" })
 
-    redirect_to("/boards/#{@new_board.id}", { :notice => "Board created successfully." })
+    if @new_board.id != nil
+      redirect_to("/boards/#{@new_board.id}", { :notice => "Board created successfully." })
+    else
+      redirect_to("/", { :notice => "Something went wrong" })
+    end
   end
 end
