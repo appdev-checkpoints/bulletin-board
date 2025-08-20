@@ -4,7 +4,12 @@
 
 <% the_board = matching_boards.at(0) %>
 
-<h1><%= the_board.name %></h1>
+<nav aria-label="breadcrumb">
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><%= the_board.name %></li>
+  </ul>
+</nav>
 
 <% all_listings = Listing.where({ :board_id => the_id }) %>
 
@@ -15,45 +20,73 @@
     Active listings
   </header>
 
-  <table>
-    <thead>
-      <th>Title</th>
-      <th>Body</th>
-      <th>Expires on</th>
-      <th>Posted on</th>
-    </thead>
+  <div class="overflow-auto">
+    <table>
+      <thead>
+        <th>Title</th>
+        <th>Body</th>
+        <th>Expires on</th>
+        <th>Posted on</th>
+      </thead>
 
-    <% active_listings.each do |a_listing| %>
-      <tr>
-        <td>
-          <%= a_listing.title %>
-        </td>
+      <% active_listings.each do |a_listing| %>
+        <tr>
+          <td>
+            <%= a_listing.title %>
+          </td>
 
-        <td>
-          <%= a_listing.body %>
-        </td>
+          <td>
+            <%= a_listing.body %>
+          </td>
 
-        <td>
-          <%= a_listing.expires_on %>
-        </td>
+          <td>
+            <%= a_listing.expires_on.strftime("%b %e, %Y") %>
+          </td>
 
-        <td>
-          <%= a_listing.created_at %>
-        </td>
-      </tr>
-    <% end %>
-
-  </table>
+          <td>
+            <%= a_listing.created_at.strftime("%b %e, %Y") %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
 </article>
-
-<h2>Expires listings</h2>
 
 <% expired_listings = all_listings.where({ :expires_on => (...Date.today) }) %>
 
-<% expired_listings.each do |a_listing| %>
-  <li>
-    <%= a_listing.title %>
+<article>
+  <header>
+    Expired listings
+  </header>
 
-    (<%= a_listing.expires_on %>)
-  </li>
-<% end %>
+  <div class="overflow-auto">
+    <table>
+      <thead>
+        <th>Title</th>
+        <th>Body</th>
+        <th>Expired on</th>
+        <th>Posted on</th>
+      </thead>
+
+      <% expired_listings.each do |a_listing| %>
+        <tr>
+          <td>
+            <%= a_listing.title %>
+          </td>
+
+          <td>
+            <%= a_listing.body %>
+          </td>
+
+          <td>
+            <%= a_listing.expires_on.strftime("%b %e, %Y") %>
+          </td>
+
+          <td>
+            <%= a_listing.created_at.strftime("%b %e, %Y") %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</article>
